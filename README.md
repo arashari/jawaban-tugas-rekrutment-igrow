@@ -1,3 +1,103 @@
+# Database Design
+## pembiayaan
+
+| column | type | keterangan |
+| --- | --- | --- |
+| id | int | PK |
+| code | string(5) | id pembiayaan, unique, 5 karakter alphabet uppercase (A-Z) |
+| plafond | int | nominal plafond |
+| mpt | int | margin per year |
+| tenor | int | tenor dalam bulan |
+| pi_pokok | int | payment interval (dalam bulan) untuk pokok |
+| pi_margin | int | payment interval (dalam bulan) untuk margin |
+| start_date | date | YYYY-MM-DD, tanggal mulai pembiayaan |
+| end_date | date | YYYY-MM-DD, tanggal pembiayaan berakhir |
+
+## rencana pembayaran (pembiayaan)
+
+| column | type | keterangan |
+| --- | --- | --- |
+| id | int | PK |
+| id_pembiayaan | int | FK |
+| payment_date | date | YYYY-MM-DD, tanggal rencana pembayaran |
+| pokok_amount | int | jumlah kewajiban pokok |
+| margin_amount | int | jumlah kewajiban margin |
+
+# Redis Design
+
+## rencana pembayaran pengembalian dana
+- key -> kode pembiayaan
+- value -> [{ d, p, sp, m, sm, t}]
+  - d: (date) tanggal pembayaran
+  - p: (pokok) kewajiban pokok
+  - sp: (sisa pokok) sisa kewajiban pokok
+  - m: (margin) kewajiban margin
+  - sm: (sisa margin) sisa kewajiban margin
+  - t: (total) total kewajiban
+  - *jika "date" == null, artinya dia adalah row "total"
+- durasi cache -> harian
+
+# API Design
+
+- response template
+
+| field | type | keterangan |
+| --- | --- | --- |
+| code | int | response code |
+| message | string | response message (raw) |
+| data | any | data yang sebenarnya |
+
+- response code
+
+| code | keterangan |
+| --- | --- |
+| 200 | success |
+| 404 | data not found |
+| 422 | validation error, misal karena kurang parameter required ketika request |
+| 500 | server error, something wrong |
+
+## create pembiayaan
+
+- POST /api/v1/pembiayaan
+
+### request
+
+| field | type | keterangan |
+| --- | --- | --- |
+| plafond | int | pokok pembiayaan |
+| mpt | int | margin per tahun |
+| tenor | int | dalam bulan |
+| pi_pokok | int | |
+| pi_margin | int | |
+| start_date | string | YYYY-MM-DD |
+
+### response
+
+| field | type | keterangan |
+| --- | --- | --- |
+| id | string | kode pembiayaan |
+## get detail pembiayaan
+
+- GET /api/v1/pembiayaan/{id}
+
+### request
+
+| field | type | keterangan |
+| --- | --- | --- |
+| id | string | kode pembiayaan |
+### response
+
+| field | type | keterangan |
+| --- | --- | --- |
+| pembiayaan | object | berisi detail pembiayaan |
+| pembayaran | array | array of object rencana pembayaran |
+
+## Limitations
+
+- code generator tidak mengecek apakah code sudah pernah tergenerate sebelumnya
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
