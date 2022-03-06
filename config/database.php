@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Str;
 
+// https://medium.com/@anthonygore/a-gotcha-with-heroku-redis-and-laravel-horizon-to-avoid-a0e6896f6ea1
+$redisUrl = parse_url(env('REDIS_URL'));
+
 return [
 
     /*
@@ -127,10 +130,10 @@ return [
         ],
 
         'default' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
+            // 'url' => env('REDIS_URL'),
+            'host' => env('REDIS_HOST', $redisUrl['host']),
+            'password' => env('REDIS_PASSWORD', $redisUrl['pass']),
+            'port' => env('REDIS_PORT', $redisUrl['port']),
             'database' => env('REDIS_DB', '0'),
         ],
 
