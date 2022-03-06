@@ -20,8 +20,8 @@
 | id | int | PK |
 | id_pembiayaan | int | FK |
 | payment_date | date | YYYY-MM-DD, tanggal rencana pembayaran |
-| pokok_amount | int | jumlah kewajiban pokok |
-| margin_amount | int | jumlah kewajiban margin |
+| pokok | int | jumlah kewajiban pokok |
+| margin | int | jumlah kewajiban margin |
 
 # Redis Design
 
@@ -95,6 +95,7 @@
 ## Limitations
 
 - code generator tidak mengecek apakah code sudah pernah tergenerate sebelumnya
+- tenor diasumsikan pasti kelipatan dari periode pembayaran pokok dan margin
 
 ---
 

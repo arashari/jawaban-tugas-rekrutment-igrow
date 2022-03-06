@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Pembiayaan;
 use Carbon\Carbon;
 
 class Helpers
@@ -47,5 +48,67 @@ class Helpers
         $date->addMonths($tenor);
 
         return $date->format("Y-m-d");
+    }
+
+    public static function calculate_rencana_pembayaran(Pembiayaan $pembiayaan) {
+        $date = Carbon::createFromFormat("Y-m-d", $pembiayaan->start_date);
+
+        $rows = [];
+
+        array_push($rows, [
+            "payment_date" => $date->format("Y-m-d"),
+            "pokok" => 0,
+            "margin" => 0
+        ]);
+
+        $pokok_amount = (int) ($pembiayaan->plafond / ($pembiayaan->tenor / $pembiayaan->pi_pokok));
+        $margin_amount = (int) (($pembiayaan->plafond * $pembiayaan->mpt / 100) / ($pembiayaan->tenor / $pembiayaan->pi_margin));
+
+        if ($pembiayaan->pi_pokok == $pembiayaan->pi_margin) {
+            for ($i = 0; $i < $pembiayaan->tenor; $i = $i + $pembiayaan->pi_pokok) {
+                $date->addMonths($pembiayaan->pi_pokok);
+
+                array_push($rows, [
+                    "payment_date" => $date->format("Y-m-d"),
+                    "pokok" => $pokok_amount,
+                    "margin" => $margin_amount
+                ]);
+            }
+        } else {
+            $_copy = $date->copy(); // untuk margin
+            $_copy2 = $date->copy(); // untuk merge
+
+            $_row_pokok = [];
+            for ($i = 0; $i < $pembiayaan->tenor; $i = $i + $pembiayaan->pi_pokok) {
+                $date->addMonths($pembiayaan->pi_pokok);
+
+                $_row_pokok[$date->format("Y-m-d")] = $pokok_amount;
+            }
+
+            $_row_margin = [];
+            for ($i = 0; $i < $pembiayaan->tenor; $i = $i + $pembiayaan->pi_margin) {
+                $_copy->addMonths($pembiayaan->pi_margin);
+
+                $_row_margin[$_copy->format("Y-m-d")] = $margin_amount;
+            }
+
+            // merge
+            for ($i = 0; $i < $pembiayaan->tenor; $i = $i + 1) {
+                $_copy2->addMonth();
+                $_date = $_copy2->format("Y-m-d");
+
+                if (!array_key_exists($_date, $_row_pokok) && !array_key_exists($_date, $_row_margin)) {
+                    continue;
+                }
+
+                array_push($rows, [
+                    "payment_date" => $_date,
+                    "pokok" => array_key_exists($_date, $_row_pokok) ? $_row_pokok[$_date] : 0,
+                    "margin" => array_key_exists($_date, $_row_margin) ? $_row_margin[$_date] : 0
+                ]);
+            }
+        }
+
+        return $rows;
     }
 }

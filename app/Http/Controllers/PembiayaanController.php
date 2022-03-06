@@ -24,7 +24,7 @@ class PembiayaanController extends Controller
 
     public function show($id = null)
     {
-        $pembiayaan = Pembiayaan::where('code', $id)->first();
+        $pembiayaan = Pembiayaan::with('rencanaPembayaran')->where('code', $id)->first();
 
         if ($pembiayaan) {
             return response()->api(200, "Data ditemukan", $pembiayaan);
