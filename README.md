@@ -112,22 +112,22 @@
 
 # Changes Files
 
-- [Procfile]()
-- [README.md]()
-- [app/Http/Controllers/PembiayaanController.php]()
-- [app/Http/Requests/PembiayaanStoreRequest.php]()
-- [app/Models/Pembiayaan.php]() <<< PERSONAL HIGHLIGHT
-- [app/Models/RencanaPembayaran.php]()
-- [app/Providers/AppServiceProvider.php]() <<< PERSONAL HIGHLIGHT
-- [app/Providers/HelpersProvider.php]()
-- [app/helpers.php]() <<< PERSONAL HIGHLIGHT
-- [composer.json]()
-- [composer.lock]()
-- [config/app.php]()
-- [config/database.php]()
-- [database/migrations/2022_03_05_011836_create_pembiayaans_table.php]()
-- [database/migrations/2022_03_05_012233_create_rencana_pembayarans_table.php]()
-- [routes/api.php]()
+- [Procfile](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/Procfile)
+- [README.md](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/README.md)
+- [app/Http/Controllers/PembiayaanController.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/Http/Controllers/PembiayaanController.php)
+- [app/Http/Requests/PembiayaanStoreRequest.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/Http/Requests/PembiayaanStoreRequest.php)
+- [app/Models/Pembiayaan.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/Models/Pembiayaan.php) <<< PERSONAL HIGHLIGHT
+- [app/Models/RencanaPembayaran.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/Models/RencanaPembayaran.php)
+- [app/Providers/AppServiceProvider.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/Providers/AppServiceProvider.php) <<< PERSONAL HIGHLIGHT
+- [app/Providers/HelpersProvider.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/Providers/HelpersProvider.php)
+- [app/helpers.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/app/helpers.php) <<< PERSONAL HIGHLIGHT
+- [composer.json](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/composer.json)
+- [composer.lock](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/composer.lock)
+- [config/app.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/config/app.php)
+- [config/database.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/config/database.php)
+- [database/migrations/2022_03_05_011836_create_pembiayaans_table.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/database/migrations/2022_03_05_011836_create_pembiayaans_table.php)
+- [database/migrations/2022_03_05_012233_create_rencana_pembayarans_table.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/database/migrations/2022_03_05_012233_create_rencana_pembayarans_table.php)
+- [routes/api.php](https://github.com/arashari/jawaban-tugas-rekrutment-igrow/blob/master/routes/api.php)
 
 > *PERSONAL HIGHLIGHT: berisi sesuatu yang menurut saya pribadi keren atau indah
 # References
