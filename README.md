@@ -26,16 +26,9 @@
 # Redis Design
 
 ## rencana pembayaran pengembalian dana
-- key -> kode pembiayaan
-- value -> [{ d, p, sp, m, sm, t}]
-  - d: (date) tanggal pembayaran
-  - p: (pokok) kewajiban pokok
-  - sp: (sisa pokok) sisa kewajiban pokok
-  - m: (margin) kewajiban margin
-  - sm: (sisa margin) sisa kewajiban margin
-  - t: (total) total kewajiban
-  - *jika "date" == null, artinya dia adalah row "total"
-- durasi cache -> harian
+- key -> "pembiayaan:" + kode pembiayaan
+- value -> api response
+- durasi cache -> 1 hari
 
 # API Design
 

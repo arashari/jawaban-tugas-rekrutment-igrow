@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Pembiayaan;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 
 class Helpers
 {
@@ -110,5 +111,24 @@ class Helpers
         }
 
         return $rows;
+    }
+
+    public static function store_cache_pembiayaan_detail($code, $data)
+    {
+        $key = "pembiayaan:".$code;
+
+        Redis::set($key, json_encode($data));
+        Redis::expire($key, 60 * 60 * 24); // expire in 1 day
+    }
+
+    public static function get_cache_pembiayaan_detail($code)
+    {
+        $key = "pembiayaan:".$code;
+
+        if (Redis::exists($key) == 0) {
+            return [ 'isExists' => false, 'data' => null ];
+        }
+
+        return [ 'isExists' => true, 'data' => json_decode(Redis::get($key)) ];
     }
 }
