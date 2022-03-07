@@ -6,12 +6,9 @@
 - [Redis Design](#redis-design)
   - [pembiayaan](#pembiayaan-1)
 - [API Design](#api-design)
+  - [get list pembiayaan](#get-list-pembiayaan)
   - [create pembiayaan](#create-pembiayaan)
-    - [request](#request)
-    - [response](#response)
   - [get detail pembiayaan](#get-detail-pembiayaan)
-    - [request](#request-1)
-    - [response](#response-1)
 - [Limitasi dan Asumsi](#limitasi-dan-asumsi)
 - [Changes Files](#changes-files)
 - [References](#references)
@@ -67,6 +64,22 @@
 | 422 | validation error, misal karena kurang parameter required ketika request |
 | 500 | server error, something wrong |
 
+## get list pembiayaan
+
+- GET /api/v1/pembiayaan
+
+### request
+
+| field | type | keterangan |
+| --- | --- | --- |
+| | | |
+
+### response
+
+| field | type | keterangan |
+| --- | --- | --- |
+| data | array | array of object Pembiayaan |
+
 ## create pembiayaan
 
 - POST /api/v1/pembiayaan
@@ -87,6 +100,7 @@
 | field | type | keterangan |
 | --- | --- | --- |
 | code | string | kode pembiayaan |
+
 ## get detail pembiayaan
 
 - GET /api/v1/pembiayaan/{id}?refresh
@@ -101,7 +115,7 @@
 
 | field | type | keterangan |
 | --- | --- | --- |
-| data | object | berisi object pembiayaan beserta relasinya dengan rencana pembiayaan |
+| data | object | berisi object Pembiayaan beserta relasinya dengan Rencana Pembiayaan |
 
 # Limitasi dan Asumsi
 
